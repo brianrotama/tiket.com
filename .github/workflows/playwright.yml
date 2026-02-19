@@ -38,7 +38,7 @@ jobs:
         env:
           GSHEET_URL: ${{ secrets.GSHEET_URL }}
           GSHEET_WEBHOOK_URL: ${{ secrets.GSHEET_WEBHOOK_URL }}
-        run: npx playwright test --grep @smoke
+        run: npx playwright test
 
       - name: Run Full Regression (Schedule)
         if: github.event_name == 'schedule'
