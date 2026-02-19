@@ -5,11 +5,18 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+  schedule:
+    - cron: '0 18 * * *' # 01:00 WIB (UTC+7)
+  workflow_dispatch:
 
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        test-type: [ default ]
 
     steps:
       - name: Checkout repository
@@ -26,7 +33,22 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests
+      - name: Run Smoke Tests (Push & PR)
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        env:
+          GSHEET_URL: ${{ secrets.GSHEET_URL }}
+          GSHEET_WEBHOOK_URL: ${{ secrets.GSHEET_WEBHOOK_URL }}
+        run: npx playwright test --grep @smoke
+
+      - name: Run Full Regression (Schedule)
+        if: github.event_name == 'schedule'
+        env:
+          GSHEET_URL: ${{ secrets.GSHEET_URL }}
+          GSHEET_WEBHOOK_URL: ${{ secrets.GSHEET_WEBHOOK_URL }}
+        run: npx playwright test
+
+      - name: Run Manual Trigger (Full)
+        if: github.event_name == 'workflow_dispatch'
         env:
           GSHEET_URL: ${{ secrets.GSHEET_URL }}
           GSHEET_WEBHOOK_URL: ${{ secrets.GSHEET_WEBHOOK_URL }}
