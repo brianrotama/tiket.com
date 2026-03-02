@@ -37,20 +37,20 @@ export default defineConfig({
         baseURL: 'https://the-internet.herokuapp.com',
       },
     },
-    // {
-    //   name: 'firefox',
-    //   use: {
-    //     ...devices['Desktop Firefox'],
-    //     baseURL: 'https://the-internet.herokuapp.com',
-    //   },
-    // },
-    // {
-    //   name: 'webkit',
-    //   use: {
-    //     ...devices['Desktop Safari'],
-    //     baseURL: 'https://the-internet.herokuapp.com',
-    //   },
-    // },
+    {
+      name: 'firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+        baseURL: 'https://the-internet.herokuapp.com',
+      },
+    },
+    {
+      name: 'webkit',
+      use: {
+        ...devices['Desktop Safari'],
+        baseURL: 'https://the-internet.herokuapp.com',
+      },
+    },
   ],
 
   outputDir: 'test-results',
