@@ -23,7 +23,7 @@ export default defineConfig({
 
   use: {
 
-    baseURL: process.env.BASE_URL,
+    baseURL: process.env.BASE_URL || 'https://www.tiket.com/id-id',
 
     headless: process.env.CI ? true : false,
 
