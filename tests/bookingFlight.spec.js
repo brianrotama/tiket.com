@@ -1,32 +1,27 @@
 import { test, expect } from '@playwright/test';
-
 import { HomePage } from '../pages/homePage.js';
-import { HotelSearchPage } from '../pages/bookingFlight.js';
-
-import { hotelData } from '../fixtures/testData.js';
-
 
 test.describe('Flight Search Test', () => {
 
-  test('User can search flight in Bandung', async ({ page }) => {
+  test('User can search flight Jakarta to Bali', async ({ page }) => {
 
     const homePage = new HomePage(page);
-    const hotelSearchPage = new HotelSearchPage(page);
 
-    // open homepage
     await homePage.gotoHome();
 
-    // click hotel tab
-    await homePage.clickHotelMenu();
+    await homePage.verifyFlightTabVisible();
 
-    // input city
-    await homePage.enterDestination(hotelData.city);
+    await homePage.clickOneWayTrip();
 
-    // click search
+    await homePage.clickFrom();
+
+    await homePage.clickChipFromJakarta();
+
+    await homePage.clickTo();
+
+    await homePage.clickChipToBali();
+
     await homePage.clickSearch();
-
-    // verify result
-    await hotelSearchPage.verifyHotelListVisible();
 
   });
 

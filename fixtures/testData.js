@@ -1,5 +1,4 @@
-export const hotelData = {
-
-  city: 'Bandung'
-
+export const flightData = {
+  from: 'Jakarta',
+  to: 'Bali'
 };

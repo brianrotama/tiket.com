@@ -1,29 +1,62 @@
 import { BasePage } from './basePage.js';
 import { URLS } from '../config/urls.js';
+import { expect } from '@playwright/test';
 
 export class HomePage extends BasePage {
 
   constructor(page) {
     super(page);
 
-    this.hotelMenu = page.locator('text=Hotel');
+    this.page = page;
 
-    this.destinationInput = page.locator('input[placeholder*="Kota"]');
+    this.flightTab = page.getByTestId('verticalTab-flight');
 
-    this.searchButton = page.locator('button:has-text("Cari Hotel")');
+    this.oneWayTrip = page.getByTestId('verticalWidgetRenderer').getByText('One way');
+    this.roundTrip = page.getByText('Round-trip', { exact: true });
 
+    this.from = page.getByTestId('verticalWidgetRenderer').getByText('From');
+    this.chipFromJakarta = page.locator('#modal-root').getByRole('button', { name: 'Jakarta', exact: true });
+
+    this.to = page.getByTestId('verticalWidgetRenderer').getByText('To');
+    this.chipToBali = page.getByRole('button', { name: 'Denpasar-Bali' });
+
+    this.searchButton = page.getByRole('button', { name: 'Let’s Search' });
   }
 
   async gotoHome() {
+
     await this.goto(URLS.HOME);
   }
 
-  async clickHotelMenu() {
-    await this.hotelMenu.click();
+  async verifyFlightTabVisible() {
+    await this.flightTab.waitFor({ state: 'visible' });
+    await expect(this.flightTab).toBeVisible();
   }
 
-  async enterDestination(city) {
-    await this.destinationInput.fill(city);
+  async clickOneWayTrip() {
+    await this.oneWayTrip.waitFor({ state: 'visible' });
+    await this.oneWayTrip.click();
+  }
+
+  async clickRoundTrip() {
+    await this.roundTrip.waitFor({ state: 'visible' });
+    await this.roundTrip.click();
+  }
+
+   async clickFrom() {
+    await this.from.click();
+  }
+
+   async clickChipFromJakarta() {
+    await this.chipFromJakarta.click();
+  }
+
+  async clickTo() {
+    await this.to.click();
+  }
+
+   async clickChipToBali() {
+    await this.chipToBali.click();
   }
 
   async clickSearch() {

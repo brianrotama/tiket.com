@@ -5,8 +5,12 @@ export class BasePage {
   }
 
   async goto(url) {
-    await this.page.goto(url);
-  }
+
+  await this.page.goto(url);
+
+  await this.handleModalIfPresent();
+
+}
 
   async click(locator) {
     await locator.click();
@@ -19,5 +23,21 @@ export class BasePage {
   async wait(seconds) {
     await this.page.waitForTimeout(seconds * 1000);
   }
+
+async handleModalIfPresent() {
+
+  const modalOverlay = this.page.locator('[class*="modal_overlay"]');
+
+  if (await modalOverlay.isVisible().catch(() => false)) {
+
+    const closeButton = this.page.locator('button[class*="close"]');
+
+    if (await closeButton.isVisible().catch(() => false)) {
+      await closeButton.click();
+    }
+
+  }
+
+}
 
 }

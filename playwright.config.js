@@ -19,13 +19,17 @@ export default defineConfig({
 
     baseURL: 'https://www.tiket.com',
 
+    storageState: '.storage/auth.json',
+
+    slowMo: 200,
+
     headless: false,
 
     viewport: { width: 1280, height: 720 },
 
     screenshot: 'only-on-failure',
 
-    video: 'retain-on-failure',
+    video: 'on',
 
     trace: 'on-first-retry',
 
