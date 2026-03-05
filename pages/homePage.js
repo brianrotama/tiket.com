@@ -8,7 +8,7 @@ export class HomePage extends BasePage {
 
     this.page = page;
 
-    this.flightTab = page.getByTestId('verticalTab-flight');
+    this.flightTab = page.locator('[data-testid="verticalTab-flight"]');
 
     this.oneWayTrip = page.getByTestId('verticalWidgetRenderer').getByText('Sekali jalan');
     this.roundTrip = page.getByText('Pulang-pergi', { exact: true });
@@ -23,16 +23,16 @@ export class HomePage extends BasePage {
   }
 
   async gotoHome() {
-
     await this.page.goto('/');
-
+    await this.page.waitForLoadState('domcontentloaded');
     await this.handleModalIfPresent();
-
+    await this.page.screenshot({ path: 'debug-home.png' });
   }
 
   async verifyFlightTabVisible() {
-    await this.flightTab.waitFor({ state: 'visible' });
-    await expect(this.flightTab).toBeVisible();
+    await expect(this.flightTab).toBeVisible({
+      timeout: 15000
+    });
   }
 
   async clickOneWayTrip() {
