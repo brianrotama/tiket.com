@@ -1,5 +1,6 @@
 import { BasePage } from './basePage.js';
 import { expect } from '@playwright/test';
+import { selectFutureDate } from '../utils/dateHelper.js';
 
 export class HomePage extends BasePage {
 
@@ -19,14 +20,18 @@ export class HomePage extends BasePage {
     this.to = page.getByText('Ke', { exact: true });
     this.chipToBali = page.getByRole('button', { name: 'Denpasar-Bali' });
 
+    this.pax = page.getByText('Penumpang, Kelas');
+    this.class = page.getByRole('button', { name: 'Ekonomi', exact: true });
+    this.save = page.getByRole('button', { name: 'Simpan' });
+
+    this.departureDate = page.getByText('Pergi', { exact: true });
+
     this.searchButton = page.getByRole('button', { name: 'Ayo Cari' });
   }
 
   async gotoHome() {
     await this.page.goto('/');
-    await this.page.waitForLoadState('domcontentloaded');
     await this.handleModalIfPresent();
-    await this.page.screenshot({ path: 'debug-home.png' });
   }
 
   async verifyFlightTabVisible() {
@@ -55,8 +60,28 @@ export class HomePage extends BasePage {
     await this.to.click();
   }
 
-   async clickChipToBali() {
+  async clickChipToBali() {
     await this.chipToBali.click();
+  }
+
+  async selectDepartureDate(monthOffset) {
+
+    await this.departureDate.click();
+
+    await selectFutureDate(this.page, monthOffset);
+
+  }
+
+  async clickPax() {
+    await this.pax.click();
+  }
+
+  async clickClass() {
+    await this.class.click();
+  }
+
+  async clickSave() {
+    await this.save.click();
   }
 
   async clickSearch() {
