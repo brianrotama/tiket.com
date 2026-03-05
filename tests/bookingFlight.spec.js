@@ -23,6 +23,8 @@ test.describe('Flight Search Test', () => {
 
     await homePage.clickSearch();
 
+    // await homePage.clickSearch();
+
   });
 
 });
