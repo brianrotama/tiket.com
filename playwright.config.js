@@ -25,26 +25,19 @@ export default defineConfig({
 
     baseURL: process.env.BASE_URL,
 
-    headless: false,
+    headless: process.env.CI ? true : false,
 
-    slowMo: 200,
+    slowMo: process.env.CI ? 0 : 200,
 
     viewport: { width: 1280, height: 720 },
 
     screenshot: 'only-on-failure',
 
-    video: 'on',
+    video: 'retain-on-failure',
 
     trace: 'on-first-retry',
 
-    // locale supaya tidak redirect ke en-id
-    locale: 'id-ID',
-
-    // optional tapi bagus untuk site regional
-    timezoneId: 'Asia/Jakarta',
-
-    // hanya dipakai kalau file benar-benar ada
-    // storageState: '.storage/auth.json',
+    locale: 'id-ID'
 
   },
 
