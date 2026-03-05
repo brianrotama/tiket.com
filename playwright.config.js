@@ -1,7 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 
-dotenv.config();
+const ENV = process.env.ENV || 'staging';
+dotenv.config({
+  path: `.env.${ENV}`
+});
 
 export default defineConfig({
 
@@ -20,7 +23,6 @@ export default defineConfig({
 
   use: {
 
-    // ambil dari .env
     baseURL: process.env.BASE_URL,
 
     headless: false,
