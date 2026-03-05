@@ -21,6 +21,7 @@ on:
           - staging
           - production
 
+
 jobs:
 
   smoke-tests:
@@ -59,6 +60,7 @@ jobs:
           retention-days: 30
 
 
+
   nightly-regression:
     if: github.event_name == 'schedule'
     timeout-minutes: 60
@@ -83,6 +85,7 @@ jobs:
       - name: Run Nightly Regression (Production)
         env:
           ENV: production
+          BASE_URL: ${{ secrets.BASE_URL }}
         run: npx playwright test
 
       - name: Upload Playwright HTML report
@@ -92,6 +95,7 @@ jobs:
           name: playwright-report-nightly
           path: playwright-report/
           retention-days: 30
+
 
 
   manual-tests:
@@ -118,6 +122,7 @@ jobs:
       - name: Run Manual Test (${{ github.event.inputs.environment }})
         env:
           ENV: ${{ github.event.inputs.environment }}
+          BASE_URL: ${{ secrets.BASE_URL }}
         run: npx playwright test
 
       - name: Upload Playwright HTML report
