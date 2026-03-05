@@ -1,5 +1,4 @@
 import { BasePage } from './basePage.js';
-import { URLS } from '../config/urls.js';
 import { expect } from '@playwright/test';
 
 export class HomePage extends BasePage {
@@ -11,21 +10,24 @@ export class HomePage extends BasePage {
 
     this.flightTab = page.getByTestId('verticalTab-flight');
 
-    this.oneWayTrip = page.getByTestId('verticalWidgetRenderer').getByText('One way');
-    this.roundTrip = page.getByText('Round-trip', { exact: true });
+    this.oneWayTrip = page.getByTestId('verticalWidgetRenderer').getByText('Sekali jalan');
+    this.roundTrip = page.getByText('Pulang-pergi', { exact: true });
 
-    this.from = page.getByTestId('verticalWidgetRenderer').getByText('From');
+    this.from = page.getByTestId('verticalWidgetRenderer').getByText('Dari');
     this.chipFromJakarta = page.locator('#modal-root').getByRole('button', { name: 'Jakarta', exact: true });
 
-    this.to = page.getByTestId('verticalWidgetRenderer').getByText('To');
+    this.to = page.getByText('Ke', { exact: true });
     this.chipToBali = page.getByRole('button', { name: 'Denpasar-Bali' });
 
-    this.searchButton = page.getByRole('button', { name: 'Let’s Search' });
+    this.searchButton = page.getByRole('button', { name: 'Ayo Cari' });
   }
 
   async gotoHome() {
 
-    await this.goto(URLS.HOME);
+    await this.page.goto('/');
+
+    await this.handleModalIfPresent();
+
   }
 
   async verifyFlightTabVisible() {
@@ -34,12 +36,10 @@ export class HomePage extends BasePage {
   }
 
   async clickOneWayTrip() {
-    await this.oneWayTrip.waitFor({ state: 'visible' });
     await this.oneWayTrip.click();
   }
 
   async clickRoundTrip() {
-    await this.roundTrip.waitFor({ state: 'visible' });
     await this.roundTrip.click();
   }
 

@@ -1,4 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export default defineConfig({
 
@@ -17,13 +20,12 @@ export default defineConfig({
 
   use: {
 
-    baseURL: 'https://www.tiket.com',
-
-    storageState: '.storage/auth.json',
-
-    slowMo: 200,
+    // ambil dari .env
+    baseURL: process.env.BASE_URL,
 
     headless: false,
+
+    slowMo: 200,
 
     viewport: { width: 1280, height: 720 },
 
@@ -33,15 +35,24 @@ export default defineConfig({
 
     trace: 'on-first-retry',
 
+    // locale supaya tidak redirect ke en-id
+    locale: 'id-ID',
+
+    // optional tapi bagus untuk site regional
+    timezoneId: 'Asia/Jakarta',
+
+    // hanya dipakai kalau file benar-benar ada
+    // storageState: '.storage/auth.json',
+
   },
 
   projects: [
-
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+      },
     }
-
   ]
 
 });
