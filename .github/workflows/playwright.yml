@@ -47,6 +47,7 @@ jobs:
       - name: Run Smoke Tests (Production)
         env:
           ENV: production
+          BASE_URL: ${{ secrets.BASE_URL }}
         run: npx playwright test
 
       - name: Upload Playwright HTML report
