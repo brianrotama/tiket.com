@@ -7,8 +7,6 @@ export class HomePage extends BasePage {
   constructor(page) {
     super(page);
 
-    this.page = page;
-
     this.flightTab = page.locator('[data-testid="verticalTab-flight"]');
 
     this.oneWayTrip = page.getByTestId('verticalWidgetRenderer').getByText('Sekali jalan');

@@ -23,28 +23,33 @@ export default defineConfig({
 
   use: {
 
-    baseURL: process.env.BASE_URL || 'https://www.tiket.com/id-id',
-
+    baseURL: process.env.UI_BASE_URL || 'https://www.tiket.com/id-id',
     headless: process.env.CI ? true : false,
-
     slowMo: process.env.CI ? 0 : 200,
-
     viewport: { width: 1280, height: 720 },
-
     screenshot: 'only-on-failure',
-
     video: 'retain-on-failure',
-
     trace: 'on-first-retry',
-
     locale: 'id-ID',
-    
     permissions: []
 
   },
 
   projects: [
-
+  {
+    name: 'ui',
+    testDir: './tests/ui',
+    use: {
+      baseURL: process.env.UI_BASE_URL
+    },
+  },
+  {
+    name: 'api',
+    testDir: './tests/api',
+    use: {
+      baseURL: process.env.API_BASE_URL
+    }
+  },
     {
       name: 'chromium',
       use: {

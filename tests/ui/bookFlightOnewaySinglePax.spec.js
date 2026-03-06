@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test';
-import { HomePage } from '../pages/homePage.js';
-import { SearchResultPage } from '../pages/searchResultPage.js';
-import { BookingFormPage } from '../pages/bookingFormPage.js';
+import { HomePage } from '../../pages/homePage.js';
+import { SearchResultPage } from '../../pages/searchResultPage.js';
+import { BookingFormPage } from '../../pages/bookingFormPage.js';
+import { PaymentPage } from '../../pages/paymentPage.js';
 
 test.describe('Flight Search Test', () => {
 
@@ -10,6 +11,7 @@ test.describe('Flight Search Test', () => {
     const homePage = new HomePage(page);
     const searchResultPage = new SearchResultPage(page);
     const bookingFormPage = new BookingFormPage(page);
+    const paymentPage = new PaymentPage(page);
 
     await homePage.gotoHome();
     await homePage.verifyFlightTabVisible();
@@ -59,6 +61,13 @@ test.describe('Flight Search Test', () => {
     await bookingFormPage.clickLanjutBayar();
     await bookingFormPage.clickConfirmLanjutBayar();
     await bookingFormPage.clickConfirmLanjutBayar2();
+    
+    await paymentPage.verifyTitleMetodePembayaran();
+    await paymentPage.clickOpenDetail();
+    await paymentPage.verifyDetailTitleRingkasanPesanan();
+    await paymentPage.verifyDetailAirline();
+    await paymentPage.clickCloseDetail();
+
   });
 
 });
