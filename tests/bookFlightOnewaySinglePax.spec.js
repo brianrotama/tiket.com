@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { HomePage } from '../pages/homePage.js';
 import { SearchResultPage } from '../pages/searchResultPage.js';
-import { selectFutureDate } from '../utils/dateHelper.js';
+import { BookingFormPage } from '../pages/bookingFormPage.js';
 
 test.describe('Flight Search Test', () => {
 
@@ -9,6 +9,7 @@ test.describe('Flight Search Test', () => {
 
     const homePage = new HomePage(page);
     const searchResultPage = new SearchResultPage(page);
+    const bookingFormPage = new BookingFormPage(page);
 
     await homePage.gotoHome();
     await homePage.verifyFlightTabVisible();
@@ -36,8 +37,28 @@ test.describe('Flight Search Test', () => {
     await searchResultPage.clickPilihMaskapai();
     await searchResultPage.clickPilihBundlingMaskapai();
     await searchResultPage.clickSkipInsurance();
-        
 
+    await bookingFormPage.verifyRoute();
+    await bookingFormPage.verifyAirline();
+    await bookingFormPage.clickOpenDetail();
+    await bookingFormPage.verifyDetailRoute();
+    await bookingFormPage.verifyDetailAirline();
+    await bookingFormPage.clickCloseDetail();
+
+    await bookingFormPage.clickSalutation();
+    await bookingFormPage.clickNama();
+    await bookingFormPage.clickInputNama('Brian Rotama Putra');
+    await bookingFormPage.clickInputNo('81807515575');
+    await bookingFormPage.clickEmail();
+    await bookingFormPage.clickInputEmail('brian.mbee@gmail.com');
+    await bookingFormPage.clickSamaDenganPemesan();
+    await bookingFormPage.selectDOB(1993, 'Juli', 11);
+    await bookingFormPage.clickPilihWn();
+    await bookingFormPage.clickDropdownId();
+    await bookingFormPage.clickCancelInsurance();
+    await bookingFormPage.clickLanjutBayar();
+    await bookingFormPage.clickConfirmLanjutBayar();
+    await bookingFormPage.clickConfirmLanjutBayar2();
   });
 
 });

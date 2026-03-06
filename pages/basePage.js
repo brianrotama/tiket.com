@@ -24,7 +24,7 @@ export class BasePage {
     await this.page.waitForTimeout(seconds * 1000);
   }
 
-async handleModalIfPresent() {
+  async handleModalIfPresent() {
 
   const modalOverlay = this.page.locator('[class*="modal_overlay"]');
 

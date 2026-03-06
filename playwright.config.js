@@ -37,17 +37,35 @@ export default defineConfig({
 
     trace: 'on-first-retry',
 
-    locale: 'id-ID'
+    locale: 'id-ID',
+    
+    permissions: []
 
   },
 
   projects: [
+
     {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
       },
     }
+
+    // {
+    //   name: 'firefox',
+    //   use: {
+    //     ...devices['Desktop Firefox'],
+    //   },
+    // }
+
+    // {
+    //   name: 'webkit',
+    //   use: {
+    //     ...devices['Desktop Safari'],
+    //   },
+    // }
+
   ]
 
 });

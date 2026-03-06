@@ -10,6 +10,8 @@ export class SearchResultPage extends BasePage {
 
     this.filter = page.getByRole('button', { name: 'Filter' }).first();
 
+    this.flightCard = page.locator('.FlightCard_card_body_wrapper___1uCh').filter({has: page.getByText('AirAsia')}).first();
+
     this.filterMaskapai = page.getByRole('button', { name: 'Maskapai' });
     this.listFilterMaskapai = page.locator('label').filter({ hasText: 'AirAsia IndonesiaMulai dari IDR' });
     this.hasilPencarian = page.getByRole('button', { name: 'Hasil Pencarian' });
@@ -37,7 +39,7 @@ export class SearchResultPage extends BasePage {
   }
 
   async clickPilihMaskapai() {
-    await this.pilihMaskapai.click();
+    await this.flightCard.click();
   }
 
   async clickPilihBundlingMaskapai() {
