@@ -115,13 +115,25 @@ export class BookingFormPage extends BasePage {
     await this.lanjutBayar.click();
   }
 
-  async clickConfirmLanjutBayar() {
+async clickConfirmLanjutBayar() {
+  try {
+    await this.confirmLanjutBayar.waitFor({ state: 'visible', timeout: 3000 });
     await this.confirmLanjutBayar.click();
+    console.log('Button Lanjut Bayar ditemukan');
+  } catch {
+    console.log('Button Lanjut Bayar tidak ada, skip step');
   }
+}
 
-  async clickConfirmLanjutBayar2() {
+async clickConfirmLanjutBayar2() {
+  try {
+    await this.confirmLanjutBayar2.waitFor({ state: 'visible', timeout: 3000 });
     await this.confirmLanjutBayar2.click();
+    console.log('Button Lanjut ke pembayaran ditemukan');
+  } catch {
+    console.log('Button Lanjut ke pembayaran tidak ada, skip step');
   }
+}
 
   async selectDOB(year, month, day) {
     await this.dobField.click();

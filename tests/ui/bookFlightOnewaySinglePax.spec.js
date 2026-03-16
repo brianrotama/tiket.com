@@ -61,7 +61,8 @@ test.describe('Flight Search Test', () => {
     await bookingFormPage.clickLanjutBayar();
     await bookingFormPage.clickConfirmLanjutBayar();
     await bookingFormPage.clickConfirmLanjutBayar2();
-    
+
+    await page.waitForURL('**/payment**', { timeout: 15000 });
     await paymentPage.verifyTitleMetodePembayaran();
     await paymentPage.clickOpenDetail();
     await paymentPage.verifyDetailTitleRingkasanPesanan();

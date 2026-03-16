@@ -12,7 +12,7 @@ export class SearchResultPage extends BasePage {
 
     this.flightCard = page.locator('.FlightCard_card_body_wrapper___1uCh').filter({has: page.getByText('AirAsia')}).first();
 
-    this.filterMaskapai = page.getByRole('button', { name: 'Maskapai' });
+    this.filterMaskapai = page.getByRole('button', { name: 'Maskapai' }).first();
     this.listFilterMaskapai = page.locator('label').filter({ hasText: 'AirAsia IndonesiaMulai dari IDR' });
     this.hasilPencarian = page.getByRole('button', { name: 'Hasil Pencarian' });
     this.pilihMaskapai = page.locator('.FlightCard_card_body_wrapper___1uCh').first();
