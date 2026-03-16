@@ -119,9 +119,9 @@ async clickConfirmLanjutBayar() {
   try {
     await this.confirmLanjutBayar.waitFor({ state: 'visible', timeout: 3000 });
     await this.confirmLanjutBayar.click();
-    console.log('Button Lanjut Bayar ditemukan');
+    console.log('Button Lanjut Bayar Found, then Click');
   } catch {
-    console.log('Button Lanjut Bayar tidak ada, skip step');
+    console.log('Button Lanjut Bayar Not Found, then Skip');
   }
 }
 
@@ -129,9 +129,9 @@ async clickConfirmLanjutBayar2() {
   try {
     await this.confirmLanjutBayar2.waitFor({ state: 'visible', timeout: 3000 });
     await this.confirmLanjutBayar2.click();
-    console.log('Button Lanjut ke pembayaran ditemukan');
+    console.log('Button Lanjut ke pembayaran Found, then Click');
   } catch {
-    console.log('Button Lanjut ke pembayaran tidak ada, skip step');
+    console.log('Button Lanjut ke pembayaran Not Found, then Skip');
   }
 }
 
